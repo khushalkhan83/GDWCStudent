@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     PlayerInput playerInput;
     Rigidbody2D rb;
 
-    [SerializeField] float moveSpeed;
+    [SerializeField] float moveSpeed, moveDrag;
     [SerializeField] float jumpForce, fallMultiplier, jumpVelocityFallOff;
 
     bool isGrounded;
@@ -20,10 +20,17 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         var moveX = playerInput.actions.FindAction("Move").ReadValue<Vector2>().x;
-        rb.velocity = new Vector2(1 * moveX * moveSpeed, rb.velocity.y);
+        if (moveX != 0)
+        {
+            rb.velocity = new Vector2(1 * moveX * moveSpeed, rb.velocity.y);
+        }
+        //horizontal drag
+        var vel = rb.velocity;
+        vel.x *= 1.0f - moveDrag; // reduce x component...
+        rb.velocity = vel;
 
         //jump velocity fall off
         if (!isGrounded && rb.velocity.y < jumpVelocityFallOff)
