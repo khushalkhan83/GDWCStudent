@@ -11,9 +11,17 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
 
     [SerializeField] float moveSpeed, moveDrag;
+    [Header("Jump Variables")]
     [SerializeField] float jumpForce, fallMultiplier, jumpVelocityFallOff;
+    float jumpPressTimer;
+    [SerializeField] float jumpPressTimerAmount;
 
+    [Header("Ground Check Variables")]
+    [SerializeField] Transform raycastStartPos;
+    [SerializeField] float raycastLength;
+    [SerializeField] LayerMask raycastLayer;
     bool isGrounded;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -39,9 +47,36 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        GroundCheck();
+
+        jumpPressTimer -= Time.deltaTime;
+        if (jumpPressTimer > 0 && isGrounded)
+        {
+            jumpPressTimer = 0;
+            Debug.Log("Jump!");
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    public void GroundCheck()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(raycastStartPos.position, Vector2.down, raycastLength, raycastLayer);
+        Debug.DrawRay(raycastStartPos.position, Vector2.down * raycastLength, Color.red);
+        if (hit.collider != null)
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+    }
+
     public void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        jumpPressTimer = jumpPressTimerAmount;
     }
 }
