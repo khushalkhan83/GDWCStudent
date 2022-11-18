@@ -270,7 +270,7 @@ MonoBehaviour:
   - {fileID: 1443341766}
   - {fileID: 2050529935}
   - {fileID: 2069238598}
-  pathPipe: {fileID: 8856314473835156259, guid: 22f6bd1122af1c24988d16b4add506ff, type: 3}
+  pathPipePrefab: {fileID: 8856314473835156259, guid: 22f6bd1122af1c24988d16b4add506ff, type: 3}
 --- !u!4 &411375604
 Transform:
   m_ObjectHideFlags: 0
@@ -3987,7 +3987,7 @@ Tilemap:
       - {fileID: -368992355941822406, guid: f1e5cbf8f054c5c49bdcd4d00dd6a09c, type: 3}
       - {fileID: -5029362127965240785, guid: f1e5cbf8f054c5c49bdcd4d00dd6a09c, type: 3}
       - {fileID: -378215699203587437, guid: f1e5cbf8f054c5c49bdcd4d00dd6a09c, type: 3}
-      m_AnimationSpeed: 14.985521
+      m_AnimationSpeed: 10.641373
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -4792,7 +4792,7 @@ GameObject:
   - component: {fileID: 1829799509}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
