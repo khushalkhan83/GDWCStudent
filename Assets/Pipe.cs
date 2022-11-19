@@ -6,58 +6,57 @@ using UnityEngine;
 public class Pipe : MonoBehaviour
 {
 
-    [SerializeField] Transform[] path;
     [SerializeField] GameObject pathPipePrefab;
-    [SerializeField] List<GameObject> pathPipes = new List<GameObject>();
     bool movePlayer = false;
     GameObject player;
-    Vector3 playerTarget;
+    [SerializeField] Transform endPoint;
+    [SerializeField] float pipeSpeed = 2f;
+    [SerializeField] Vector3 exitForce;
+    [SerializeField] Canvas buttonPromptCanvas;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        buttonPromptCanvas.enabled = true;
+        if (collision.CompareTag("Player"))
+        {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                MovePlayerThroughPipe();
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        buttonPromptCanvas.enabled = false;
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            MovePlayerThroughPipe();
-        }
 
         if(movePlayer)
         {
-            player.transform.Translate(playerTarget);
+            player.transform.position = Vector3.MoveTowards(player.transform.position ,endPoint.position, pipeSpeed * Time.deltaTime );
+            if(player.transform.position == endPoint.position)
+            {
+                player.GetComponent<BoxCollider2D>().enabled = true;
+                player.GetComponent<PlayerMovement>().enabled = true;
+                player.GetComponent<Rigidbody2D>().gravityScale = 1;
+                player.GetComponent<Rigidbody2D>().AddForce(exitForce, ForceMode2D.Impulse);
+                movePlayer = false;
+            }
         }
     }
 
     void MovePlayerThroughPipe()
     {
-        player.GetComponent<Rigidbody2D>().isKinematic = true;
+        player.GetComponent<Rigidbody2D>().gravityScale = 0;
         player.GetComponent<BoxCollider2D>().enabled = false;
+        player.GetComponent<PlayerMovement>().enabled = false;
         movePlayer = true;
-        foreach(GameObject pathPipe in pathPipes)
-        {
-            playerTarget = pathPipe.transform.position;
-            while(player.transform.position != playerTarget)
-            {
-                Debug.Log("Moving");
-            }
-        }
-        player.GetComponent<Rigidbody2D>().isKinematic = false;
-        movePlayer = false;
-    }
-
-    public void UpdatePipe()
-    {
-        foreach(GameObject previousPipe in pathPipes)
-        {
-            DestroyImmediate(previousPipe.gameObject);
-        }
-        foreach(Transform point in path)
-        {
-            var newPathPipe = Instantiate(pathPipePrefab, point.position, Quaternion.identity);
-            newPathPipe.transform.parent = transform;
-            pathPipes.Add(newPathPipe);
-        }
+        
     }
 }

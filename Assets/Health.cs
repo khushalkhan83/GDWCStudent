@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     [SerializeField] int maxHP = 3;
+    [SerializeField] int startHP = 2;
     float currentHP;
     [SerializeField] Image[] healthImages;
     private void Awake()
     {
-        currentHP = maxHP;
+        currentHP = startHP;
         UpdateHealthUI();
     }
 
@@ -28,7 +29,7 @@ public class Health : MonoBehaviour
     {
         for (int i = 0; i < maxHP; i++)
         {
-            if (currentHP >= i)
+            if (currentHP > i)
             {
                 healthImages[i].enabled = true;
             }

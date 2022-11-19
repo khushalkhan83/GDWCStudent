@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce, fallMultiplier, jumpVelocityFallOff;
     float jumpPressTimer;
     [SerializeField] float jumpPressTimerAmount;
+    [SerializeField] float downwardVelocityCap = 15f;
 
     [Header("Ground Check Variables")]
     [SerializeField] Transform raycastStartPos;
@@ -44,6 +45,11 @@ public class PlayerMovement : MonoBehaviour
         if (!isGrounded && rb.velocity.y < jumpVelocityFallOff)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
+        }
+
+        if(rb.velocity.y < downwardVelocityCap)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, downwardVelocityCap);
         }
     }
 
