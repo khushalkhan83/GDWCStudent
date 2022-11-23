@@ -13,32 +13,41 @@ public class Pipe : MonoBehaviour
     [SerializeField] float pipeSpeed = 2f;
     [SerializeField] Vector3 exitForce;
     [SerializeField] Canvas buttonPromptCanvas;
+    bool playerInEntrace = false;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
-    private void OnTriggerStay2D(Collider2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        playerInEntrace = true;
         buttonPromptCanvas.enabled = true;
-        if (collision.CompareTag("Player"))
-        {
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                MovePlayerThroughPipe();
-            }
-        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        buttonPromptCanvas.enabled = false;
         buttonPromptCanvas.enabled = false;
     }
 
     private void Update()
     {
+        if(playerInEntrace)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                player.transform.position = transform.position;
+                MovePlayerThroughPipe();
+                playerInEntrace = false;
+                buttonPromptCanvas.enabled = false;
+            }
+        }
+
 
         if(movePlayer)
         {
+            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             player.transform.position = Vector3.MoveTowards(player.transform.position ,endPoint.position, pipeSpeed * Time.deltaTime );
             if(player.transform.position == endPoint.position)
             {

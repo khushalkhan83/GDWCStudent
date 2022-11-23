@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
@@ -9,6 +10,7 @@ public class Health : MonoBehaviour
     [SerializeField] int startHP = 2;
     float currentHP;
     [SerializeField] Image[] healthImages;
+    [SerializeField] Sprite healthFull, healthEmpty;
     private void Awake()
     {
         currentHP = startHP;
@@ -23,6 +25,10 @@ public class Health : MonoBehaviour
             currentHP = maxHP;
         }
         UpdateHealthUI();
+        if(currentHP <= 0)
+        {
+            Die();
+        }
     }
 
     private void UpdateHealthUI()
@@ -31,12 +37,18 @@ public class Health : MonoBehaviour
         {
             if (currentHP > i)
             {
-                healthImages[i].enabled = true;
+                healthImages[i].sprite = healthFull;
             }
             else
             {
-                healthImages[i].enabled = false;
+                healthImages[i].sprite = healthEmpty;
             }
         }
     }
+
+    void Die()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
