@@ -41,12 +41,14 @@ public class PlayerMovement : MonoBehaviour
         vel.x *= 1.0f - moveDrag; // reduce x component...
         rb.velocity = vel;
 
+        
+
         //jump velocity fall off
         if (!isGrounded && rb.velocity.y < jumpVelocityFallOff)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
         }
-
+        //cap fall speed
         if(rb.velocity.y < downwardVelocityCap)
         {
             rb.velocity = new Vector2(rb.velocity.x, downwardVelocityCap);
@@ -81,8 +83,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Jump()
+    public void OnJump(InputAction.CallbackContext context)
     {
-        jumpPressTimer = jumpPressTimerAmount;
+        if (context.started)
+        {
+            jumpPressTimer = jumpPressTimerAmount;
+        }
+        else if (context.canceled)
+        {
+            //player released jump
+            if (!isGrounded && rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.5f);
+            }
+        }
     }
 }
