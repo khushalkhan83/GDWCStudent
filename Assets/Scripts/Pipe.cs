@@ -27,7 +27,7 @@ public class Pipe : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        buttonPromptCanvas.enabled = false;
+        playerInEntrace = false;
         buttonPromptCanvas.enabled = false;
     }
 

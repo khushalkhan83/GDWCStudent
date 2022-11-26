@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Dirt
+  m_Name: tile_full_grey
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: d97b4d1f856dfa0469930d9ae92cb817, type: 3}
-  m_Color: {r: 0.41509432, g: 0.17833671, b: 0.041770466, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c7d98198d231d3044910c59ef9fb07e7, type: 3}
+  m_Color: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
   m_Transform:
     e00: 1
     e01: 0

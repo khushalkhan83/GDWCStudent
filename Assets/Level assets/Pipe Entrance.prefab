@@ -313,7 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathPipePrefab: {fileID: 8856314473835156259, guid: 22f6bd1122af1c24988d16b4add506ff, type: 3}
   endPoint: {fileID: 8239708199264259733}
-  pipeSpeed: 6
+  pipeSpeed: 10
   exitForce: {x: 0, y: -10, z: 0}
   buttonPromptCanvas: {fileID: 8239708199029109879}
 --- !u!212 &8239708200871791137
@@ -365,7 +365,7 @@ SpriteRenderer:
   m_Size: {x: 1.25, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &8239708200871791138
