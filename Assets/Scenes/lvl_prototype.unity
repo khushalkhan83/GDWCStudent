@@ -534,8 +534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77030faff3812a7429edeaca91e9c873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
-  cornerSpeed: 200
+  movementSpeed: 2
+  cornerSpeed: 2000
   jumpSpeed: 4
   fallSpeed: 4
   climbSpeed: 3
