@@ -80,11 +80,33 @@
                 },
                 {
                     "name": "",
-                    "id": "90688c97-0f22-48c3-9b9a-070df4acc5ab",
+                    "id": "9d4ce951-36f4-499b-87b0-e842da5da416",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76039225-4004-45f9-8e5c-26e8465342bb",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "49c8e9d9-3d9d-4402-a30c-c4b5188943a9",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard WASD",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -103,6 +125,11 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "Controller",
+            "bindingGroup": "Controller",
+            "devices": []
         }
     ]
 }

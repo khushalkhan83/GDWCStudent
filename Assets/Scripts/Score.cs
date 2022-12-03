@@ -11,7 +11,7 @@ public class Score : MonoBehaviour
     public void UpdateScore(int amount)
     {
         score += amount;
-        scoreText.text = amount.ToString("000");
+        scoreText.text = score.ToString("000");
     }
 
     public int GetScore()
