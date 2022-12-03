@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float downwardVelocityCap = 15f;
 
     [Header("Ground Check Variables")]
-    [SerializeField] Transform raycastStartPos;
+    [SerializeField] Transform[] raycastStartPositions;
     [SerializeField] float raycastLength;
     [SerializeField] LayerMask raycastLayer;
     bool isGrounded;
@@ -71,9 +71,17 @@ public class PlayerMovement : MonoBehaviour
 
     public void GroundCheck()
     {
-        RaycastHit2D hit = Physics2D.Raycast(raycastStartPos.position, Vector2.down, raycastLength, raycastLayer);
-        Debug.DrawRay(raycastStartPos.position, Vector2.down * raycastLength, Color.red);
-        if (hit.collider != null)
+        bool atleastOneGrounded = false;
+        foreach (Transform pos in raycastStartPositions)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(pos.position, Vector2.down, raycastLength, raycastLayer);
+            Debug.DrawRay(pos.position, Vector2.down * raycastLength, Color.red);
+            if (hit.collider != null)
+            {
+                atleastOneGrounded = true;
+            }
+        }
+        if(atleastOneGrounded)
         {
             isGrounded = true;
         }
