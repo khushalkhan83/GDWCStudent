@@ -11,7 +11,7 @@ public class Health : MonoBehaviour
     float currentHP;
     [SerializeField] Image[] healthImages;
     [SerializeField] Sprite healthFull, healthEmpty;
-    bool canHit = true;
+    public bool canHit = true;
 
     [SerializeField] float invincibleTime = 1f;
     private void Awake()

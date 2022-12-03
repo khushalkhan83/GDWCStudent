@@ -10,7 +10,7 @@ namespace PathBerserker2d
         {
             if (PathBerserker2dSettings.DrawGraphWhilePlaying && PBWorld.NavGraph != null)
             {
-                NavGraphDrawer.Draw(PBWorld.NavGraph);
+                //NavGraphDrawer.Draw(PBWorld.NavGraph);
             }
         }
     }
