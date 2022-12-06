@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Tilemaps;
 [ExecuteAlways]
 public class Pipe : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class Pipe : MonoBehaviour
     [SerializeField] Vector3 exitForce;
     [SerializeField] Canvas buttonPromptCanvas;
     bool playerInEntrace = false;
-
+    [SerializeField] Tilemap tilemap;
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -47,6 +47,17 @@ public class Pipe : MonoBehaviour
 
         if(movePlayer)
         {
+            Vector3Int pos = new Vector3Int(Mathf.FloorToInt(player.transform.position.x),
+                Mathf.FloorToInt(player.transform.position.y)-1,
+                Mathf.FloorToInt(player.transform.position.z));
+            if(tilemap.GetTile(pos) != null)
+            {
+                TileBase prevTile = tilemap.GetTile<TileBase>(pos);
+
+                tilemap.SetTile(pos, null);
+                StartCoroutine(ReplaceTile(prevTile, pos));
+            }
+
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             player.transform.position = Vector3.MoveTowards(player.transform.position ,endPoint.position, pipeSpeed * Time.deltaTime );
             if(player.transform.position == endPoint.position)
@@ -58,6 +69,15 @@ public class Pipe : MonoBehaviour
                 movePlayer = false;
             }
         }
+    }
+
+    IEnumerator ReplaceTile(TileBase tile, Vector3Int position)
+    {
+        Debug.Log("co started");
+        yield return new WaitForSeconds(1f);
+        tilemap.SetTile(position, tile);
+        Debug.Log("co ended");
+
     }
 
     void MovePlayerThroughPipe()
