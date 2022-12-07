@@ -130,7 +130,7 @@ MonoBehaviour:
   - {fileID: 457041424886500590}
   - {fileID: 8190474774896607715}
   - {fileID: 355844687584335950}
-  raycastLength: 0.02
+  raycastLength: 0.05
   raycastLayer:
     serializedVersion: 2
     m_Bits: 64

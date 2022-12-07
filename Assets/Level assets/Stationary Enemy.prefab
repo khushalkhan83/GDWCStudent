@@ -103,7 +103,7 @@ MonoBehaviour:
     m_Bits: 72
   projectilePrefab: {fileID: 1487274951956739778, guid: 8912c6f9676973540a5d8e339fd6de62, type: 3}
   projectileForce: 50
-  projectileCooldown: 0
+  projectileCooldown: 3
 --- !u!58 &6606655723849404879
 CircleCollider2D:
   m_ObjectHideFlags: 0
