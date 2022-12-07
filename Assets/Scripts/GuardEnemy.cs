@@ -10,11 +10,12 @@ public class GuardEnemy : MonoBehaviour
     [SerializeField] Transform patrolRoute;
     List<Transform> patrolPoints = new List<Transform>();
     NavAgent navAgent;
-    
+    [SerializeField] SpriteRenderer alertSprite;
 
     private void Awake()
     {
         navAgent = GetComponent<NavAgent>();
+        patrolRoute.GetComponent<GuardArea>().guard = this;
 
         foreach (Transform point in patrolRoute.GetComponentsInChildren<Transform>())
         {
@@ -57,10 +58,13 @@ public class GuardEnemy : MonoBehaviour
             GetComponent<MultiGoalWalker>().goals[0] = GameObject.FindGameObjectWithTag("Player").transform;
             GetComponent<MultiGoalWalker>().enabled = false;
             GetComponent<GoalWalker>().enabled = true;
+            alertSprite.enabled = true;
 
         }
         else
         {
+            alertSprite.enabled = false;
+
             GetComponent<MultiGoalWalker>().enabled = true;
             GetComponent<GoalWalker>().enabled = false;
 

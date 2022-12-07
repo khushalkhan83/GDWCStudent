@@ -10,6 +10,7 @@ public class LevelWinCanvas : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] Image screenFadeImage;
     [SerializeField] GameObject contents;
+    int totalPickups;
 
     private void Awake()
     {
@@ -25,6 +26,13 @@ public class LevelWinCanvas : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+
+        totalPickups = GameObject.FindObjectsOfType<Pickup>().Length;
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = FindObjectOfType<Score>().GetScore().ToString("00") + "/" + totalPickups.ToString("00");
     }
 
     public void NextLevelButton()
@@ -33,8 +41,10 @@ public class LevelWinCanvas : MonoBehaviour
         Debug.Log(sceneIndex + 1);
         SceneManager.LoadScene(sceneIndex + 1);
         StartCoroutine(FadeIn(2f));
+        totalPickups = GameObject.FindObjectsOfType<Pickup>().Length;
+
     }
-    
+
     public IEnumerator FadeIn(float durationInSeconds)
     {
         contents.SetActive(false);
@@ -55,6 +65,7 @@ public class LevelWinCanvas : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         contents.SetActive(true);
+        UpdateScoreText();
     }
 
 

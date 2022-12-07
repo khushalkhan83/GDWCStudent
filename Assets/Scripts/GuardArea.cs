@@ -7,7 +7,7 @@ public class GuardArea : MonoBehaviour
 {
 
     BoxCollider2D coll;
-    GuardEnemy guard;
+    public GuardEnemy guard;
 
     private void OnDrawGizmos()
     {
@@ -20,11 +20,6 @@ public class GuardArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<GuardEnemy>())
-        {
-            guard = collision.GetComponent<GuardEnemy>();
-        }
-
         if(collision.CompareTag("Player"))
         {
             guard.playerInArea = true;
