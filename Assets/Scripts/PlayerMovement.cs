@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform[] raycastStartPositions;
     [SerializeField] float raycastLength;
     [SerializeField] LayerMask raycastLayer;
-    bool isGrounded;
+    public bool isGrounded;
 
     private void Awake()
     {

@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 457041425149869577}
   - component: {fileID: 457041425149869573}
+  - component: {fileID: 8429948732589619164}
   - component: {fileID: 457041425149869582}
   - component: {fileID: 457041425149869583}
   - component: {fileID: 457041425149869579}
@@ -93,6 +94,19 @@ MonoBehaviour:
   healthEmpty: {fileID: 21300000, guid: 531e293dc4c776e4f828d2d387ead879, type: 3}
   canHit: 1
   invincibleTime: 2
+--- !u!114 &8429948732589619164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457041425149869580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bde3d310e6e551408326d1e185f9e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 457041426328262887}
 --- !u!114 &457041425149869582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +134,7 @@ MonoBehaviour:
   raycastLayer:
     serializedVersion: 2
     m_Bits: 64
+  isGrounded: 0
 --- !u!114 &457041425149869583
 MonoBehaviour:
   m_ObjectHideFlags: 0
