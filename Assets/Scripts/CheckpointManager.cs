@@ -21,10 +21,19 @@ public class CheckpointManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
+        SceneManager.sceneLoaded +=
+
         player = GameObject.FindGameObjectWithTag("Player");
         if(currentCheckpoint !=null)
         {
             player
         }
     }
+
+    void PlacePlayer()
+    {
+
+    }
+
+
 }
