@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,16 @@ public class CloudMovement : MonoBehaviour
     PlayerInput playerInput;
     Rigidbody2D rb;
 
+    [SerializeField] float moveSpeed, moveDrag;
+
+    RaycastHit2D ray;
     [SerializeField] Transform raycastStartPosition;
     [SerializeField] float raycastLength;
     [SerializeField] LayerMask raycastLayer;
     public float targetHeight;
     [SerializeField] float hoverStrength;
 
+    public bool inHeatBlock = false;
     bool jumpHeld = false;
    
     private void Awake()
@@ -25,23 +30,40 @@ public class CloudMovement : MonoBehaviour
     private void Update()
     {
         Hover();
-    
-        if(jumpHeld)
+        Move();
+
+        if (!inHeatBlock)
         {
-            targetHeight += hoverStrength * Time.deltaTime;
-            if(targetHeight > 3)
+            if (jumpHeld && !ray.collider.isTrigger)
             {
-                targetHeight = 3;
+                targetHeight += hoverStrength * Time.deltaTime;
+                if (targetHeight > 3)
+                {
+                    targetHeight = 3;
+                }
+            }
+            else
+            {
+                targetHeight -= hoverStrength * Time.deltaTime;
+                if (targetHeight < 1)
+                {
+                    targetHeight = 1;
+                }
             }
         }
-        else
+    }
+
+    private void Move()
+    {
+        var moveX = playerInput.actions.FindAction("Move").ReadValue<Vector2>().x;
+        if (moveX != 0)
         {
-            targetHeight -= hoverStrength * Time.deltaTime;
-            if(targetHeight < 1)
-            {
-                targetHeight = 1;
-            }
+            rb.velocity = new Vector2(1 * moveX * moveSpeed, rb.velocity.y);
         }
+        //horizontal drag
+        var vel = rb.velocity;
+        vel.x *= 1.0f - moveDrag; // reduce x component...
+        rb.velocity = vel;
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -58,10 +80,8 @@ public class CloudMovement : MonoBehaviour
 
     public void Hover()
     {
-        
-        RaycastHit2D ray = Physics2D.Raycast(raycastStartPosition.position, Vector2.down, raycastLength, raycastLayer);
-        rb.position = Vector2.MoveTowards(transform.position, new Vector2(rb.position.x, ray.point.y + targetHeight), hoverStrength * Time.deltaTime);
-        Debug.Log(ray.point.y);
+        ray = Physics2D.Raycast(raycastStartPosition.position, Vector2.down, raycastLength, raycastLayer);
+        rb.position = Vector2.MoveTowards(rb.position, new Vector2(transform.position.x, ray.point.y + targetHeight), hoverStrength * Time.deltaTime);
     }
 
 }

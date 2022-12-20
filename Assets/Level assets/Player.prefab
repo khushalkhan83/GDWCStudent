@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  moveDrag: 0.1
+  moveDrag: 0.125
   jumpForce: 9.5
   fallMultiplier: 2
   jumpVelocityFallOff: 6

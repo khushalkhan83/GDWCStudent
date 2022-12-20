@@ -93892,14 +93892,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 457041425149869582, guid: cf7577187649393489f6353251ee712d, type: 3}
-      propertyPath: moveDrag
-      value: 0.125
-      objectReference: {fileID: 0}
-    - target: {fileID: 457041426224544021, guid: cf7577187649393489f6353251ee712d, type: 3}
-      propertyPath: orthographic size
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf7577187649393489f6353251ee712d, type: 3}
 --- !u!1001 &2416890129827731127
