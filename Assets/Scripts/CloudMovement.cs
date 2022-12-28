@@ -16,7 +16,7 @@ public class CloudMovement : MonoBehaviour
     [SerializeField] float raycastLength;
     [SerializeField] LayerMask raycastLayer;
     public float targetHeight;
-    [SerializeField] float hoverStrength;
+    [SerializeField] float hoverStrength, descendMultiplier;
 
     public bool inHeatBlock = false;
     bool jumpHeld = false;
@@ -44,7 +44,7 @@ public class CloudMovement : MonoBehaviour
             }
             else
             {
-                targetHeight -= hoverStrength * Time.deltaTime;
+                targetHeight -= (hoverStrength * descendMultiplier)  * Time.deltaTime;
                 if (targetHeight < 1)
                 {
                     targetHeight = 1;
@@ -81,7 +81,29 @@ public class CloudMovement : MonoBehaviour
     public void Hover()
     {
         ray = Physics2D.Raycast(raycastStartPosition.position, Vector2.down, raycastLength, raycastLayer);
-        rb.position = Vector2.MoveTowards(rb.position, new Vector2(transform.position.x, ray.point.y + targetHeight), hoverStrength * Time.deltaTime);
+
+        if (transform.position.y > targetHeight)
+        {
+            if (ray.collider != null)
+            {
+                if (!ray.collider.isTrigger)
+                {
+                    rb.position = Vector2.MoveTowards(rb.position, new Vector2(transform.position.x, ray.point.y + targetHeight), (hoverStrength * descendMultiplier) * Time.deltaTime);
+                }
+                else
+                {
+                    rb.position = Vector2.MoveTowards(rb.position, new Vector2(transform.position.x, ray.point.y + targetHeight), hoverStrength * Time.deltaTime);
+                }
+            }
+            else
+            {
+                rb.position = Vector2.MoveTowards(rb.position, new Vector2(transform.position.x, ray.point.y + targetHeight), (hoverStrength * descendMultiplier) * Time.deltaTime);
+            }
+        }
+        else
+        {
+            rb.position = Vector2.MoveTowards(rb.position, new Vector2(transform.position.x, ray.point.y + targetHeight), hoverStrength * Time.deltaTime);
+        }
     }
 
 }

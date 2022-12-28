@@ -37,6 +37,7 @@ public class LevelWinCanvas : MonoBehaviour
 
     public void NextLevelButton()
     {
+        FindObjectOfType<CheckpointManager>().currentCheckpoint = null;
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         Debug.Log(sceneIndex + 1);
         SceneManager.LoadScene(sceneIndex + 1);
