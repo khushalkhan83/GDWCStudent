@@ -18,7 +18,7 @@ public class CloudMovement : MonoBehaviour
     public float targetHeight;
     [SerializeField] float hoverStrength, descendMultiplier;
 
-    public bool inHeatBlock = false;
+
     bool jumpHeld = false;
    
     private void Awake()
@@ -31,24 +31,34 @@ public class CloudMovement : MonoBehaviour
     {
         Hover();
         Move();
+        HandleHeight();
+    }
 
-        if (!inHeatBlock)
+    private void HandleHeight()
+    {
+        //check if not in heat block
+        if(ray.collider != null)
         {
-            if (jumpHeld && !ray.collider.isTrigger)
+            if(ray.collider.isTrigger)
             {
-                targetHeight += hoverStrength * Time.deltaTime;
-                if (targetHeight > 3)
-                {
-                    targetHeight = 3;
-                }
+                return;
             }
-            else
+        }
+        //handle raising height 
+        if (jumpHeld)
+        {
+            targetHeight += hoverStrength * Time.deltaTime;
+            if (targetHeight > 4)
             {
-                targetHeight -= (hoverStrength * descendMultiplier)  * Time.deltaTime;
-                if (targetHeight < 1)
-                {
-                    targetHeight = 1;
-                }
+                targetHeight = 4;
+            }
+        }
+        else
+        {
+            targetHeight -= (hoverStrength * descendMultiplier) * Time.deltaTime;
+            if (targetHeight < 1)
+            {
+                targetHeight = 1;
             }
         }
     }
