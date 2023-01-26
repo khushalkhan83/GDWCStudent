@@ -5,17 +5,14 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     [SerializeField] int scoreAmount = 1;
-
-    public void Awake()
-    {
-        //check for scene state script to see if collected in previous level attempt?
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
+            //increment score
             FindObjectOfType<Score>().UpdateScore(scoreAmount);
+            //disable object
             gameObject.SetActive(false);
         }
     }

@@ -28,21 +28,18 @@ public class CheckpointManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += SpawnPlayer;
-
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= SpawnPlayer;
-
     }
-
 
     public void SpawnPlayer(Scene scene, LoadSceneMode mode)
     {
+        
         levelSpawnPos = GameObject.FindGameObjectWithTag("Level Spawn").transform;
         player = GameObject.FindGameObjectWithTag("Player");
-
         if (player != null)
         {
             if (currentCheckpoint != null)
@@ -53,7 +50,6 @@ public class CheckpointManager : MonoBehaviour
             else
             {
                 player.transform.position = levelSpawnPos.position;
-
             }
         }
     }
