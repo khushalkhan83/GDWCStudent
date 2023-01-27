@@ -47,7 +47,7 @@ public class CloudMovement : MonoBehaviour
         //handle raising height 
         if (jumpHeld)
         {
-            targetHeight += hoverStrength * Time.deltaTime;
+            targetHeight += hoverStrength;
             if (targetHeight > 4)
             {
                 targetHeight = 4;
@@ -55,7 +55,7 @@ public class CloudMovement : MonoBehaviour
         }
         else
         {
-            targetHeight -= (hoverStrength * descendMultiplier) * Time.deltaTime;
+            targetHeight -= (hoverStrength * descendMultiplier);
             if (targetHeight < 1)
             {
                 targetHeight = 1;

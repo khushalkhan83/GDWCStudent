@@ -30,10 +30,6 @@ public class CheckpointManager : MonoBehaviour
         SceneManager.sceneLoaded += SpawnPlayer;
     }
 
-<<<<<<< HEAD
-        SceneManager.sceneLoaded +=
-
-=======
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= SpawnPlayer;
@@ -41,9 +37,8 @@ public class CheckpointManager : MonoBehaviour
 
     public void SpawnPlayer(Scene scene, LoadSceneMode mode)
     {
-        
+
         levelSpawnPos = GameObject.FindGameObjectWithTag("Level Spawn").transform;
->>>>>>> 085b11330037e624fde4c43e1ecb58d6d6046f4c
         player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -58,11 +53,4 @@ public class CheckpointManager : MonoBehaviour
             }
         }
     }
-
-    void PlacePlayer()
-    {
-
-    }
-
-
 }
