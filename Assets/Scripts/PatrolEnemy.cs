@@ -10,6 +10,7 @@ public class PatrolEnemy : MonoBehaviour
     NavAgent navAgent;
 
     [SerializeField] int damage;
+    [SerializeField] bool knockBack = true;
 
     private void Awake()
     {
@@ -31,14 +32,17 @@ public class PatrolEnemy : MonoBehaviour
             if (collision.GetComponent<Health>().canHit)
             {
                 collision.GetComponent<Health>().UpdateHealth(-damage, true);
-                collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                if (collision.transform.position.x < transform.position.x)
+                if (knockBack)
                 {
-                    collision.GetComponent<Rigidbody2D>().AddForce(new Vector2(-30f, 7.5f), ForceMode2D.Impulse);
-                }
-                else
-                {
-                    collision.GetComponent<Rigidbody2D>().AddForce(new Vector2(30f, 7.5f), ForceMode2D.Impulse);
+                    collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    if (collision.transform.position.x < transform.position.x)
+                    {
+                        collision.GetComponent<Rigidbody2D>().AddForce(new Vector2(-30f, 7.5f), ForceMode2D.Impulse);
+                    }
+                    else
+                    {
+                        collision.GetComponent<Rigidbody2D>().AddForce(new Vector2(30f, 7.5f), ForceMode2D.Impulse);
+                    }
                 }
             }
         }
