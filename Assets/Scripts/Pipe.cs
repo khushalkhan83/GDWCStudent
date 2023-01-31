@@ -64,6 +64,7 @@ public class Pipe : MonoBehaviour
             {
                 player.GetComponent<BoxCollider2D>().enabled = true;
                 player.GetComponent<PlayerMovement>().enabled = true;
+                player.GetComponentInChildren<SpriteRenderer>().enabled = true;
                 player.GetComponent<Rigidbody2D>().gravityScale = 1;
                 player.GetComponent<Rigidbody2D>().AddForce(exitForce, ForceMode2D.Impulse);
                 movePlayer = false;
@@ -85,6 +86,8 @@ public class Pipe : MonoBehaviour
         player.GetComponent<Rigidbody2D>().gravityScale = 0;
         player.GetComponent<BoxCollider2D>().enabled = false;
         player.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponentInChildren<SpriteRenderer>().enabled = false;
+
         movePlayer = true;
         
     }
