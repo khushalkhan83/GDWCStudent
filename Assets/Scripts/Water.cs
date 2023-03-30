@@ -5,12 +5,14 @@ using UnityEngine;
 public class Water : MonoBehaviour
 {
     [SerializeField] float timeTilHeal = 2f;
+    Animator animator;
     float timer;
     bool used = false;
 
     private void Awake()
     {
         timer = timeTilHeal;
+        animator = GetComponent<Animator>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -22,13 +24,12 @@ public class Water : MonoBehaviour
             {
                 collision.GetComponent<Health>().UpdateHealth(1);
                 timer = timeTilHeal;
-                foreach(SpriteRenderer sprite in GetComponentsInChildren<SpriteRenderer>())
-                {
-                    sprite.color = Color.red;
-                }
                 used = true;
+                animator.SetBool("Used", used);
             }
         }
+
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
